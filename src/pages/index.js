@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
-import styles from "../assets/styles/index.module.scss";
+import styles from "./index.module.scss";
 import ApiImdb from "../services/api-imdb";
 
 export default function Home() {
@@ -9,8 +8,19 @@ export default function Home() {
   const [search, setSearch] = useState("");
 
   const fetchResults = async () => {
-    let result = await ApiImdb.getAutoComplete(search);
-    setResults(result.d);
+    const { data } = await ApiImdb.getAutoComplete(search);
+    setSearch(() => "");
+    // const [listName, name, ...rest] = data;'
+    const famousName = data.d[0].id;
+
+    const response = await ApiImdb.getFamousInfo(famousName);
+    console.log(response.data);
+
+    // setResults(result.d);
+  };
+
+  const handleSubmit = (text) => {
+    setSearch(text.target.value);
   };
 
   return (
@@ -18,7 +28,7 @@ export default function Home() {
       <Head>
         <title>Home | Barraca da Fofoca</title>
       </Head>
-      <h1>Home</h1>
+      {/* <h1>Home</h1>
       <div
         style={{
           textAlign: "center",
@@ -27,50 +37,32 @@ export default function Home() {
           alignItems: "center",
         }}
       >
+
+        <main>
+
+        </main>
         <h1 className={styles.title}>Barrafa da fofoca</h1>
         <div style={{ display: "flex" }}>
           <input type={"text"} onChange={(t) => setSearch(t.target.value)} />
           <button onClick={async () => await fetchResults()}>Buscar...</button>
         </div>
-        <div style={{ textAlign: "left" }}>
-          {results
-            .filter((item) => {
-              return item.s.includes("Actor") || item.s.includes("Actress");
-            })
-            .map((res, k) => {
-              return (
-                <a key={k} href={`/fofoca/${res.id}`}>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: 10,
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        borderRadius: 100,
-                        width: 30,
-                        height: 30,
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Image
-                        src={res.i.imageUrl}
-                        alt={res.l}
-                        width={res.i.width}
-                        height={res.i.height}
-                      />
-                    </div>
-                    <p style={{ color: "#000" }} value={res.id}>
-                      {res.l}
-                    </p>
-                  </div>
-                </a>
-              );
-            })}
+      </div> */}
+      <main>
+        <div className={styles.container}>
+          <div className={styles.contant}>
+            <h1>Barraca da fofoca</h1>
+            <p>Saiba o que andam falando do seu artista favorito</p>
+            <input
+              type="text"
+              onChange={handleSubmit}
+              value={search}
+              placeholder="digite o nome do artista"
+            />
+            <button onClick={fetchResults}>Buscar</button>
+          </div>
+          <img src="/images/hero-right.png" alt="" />
         </div>
-      </div>
+      </main>
     </>
   );
 }
