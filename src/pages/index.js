@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Home | Barraca da Fofoca</title>
       </Head>
-      <h1 className={styles.title}>Configuração inicial</h1>
+      <h1>Home</h1>
     </>
   );
 }

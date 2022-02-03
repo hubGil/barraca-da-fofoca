@@ -1,0 +1,15 @@
+.header_container {
+  width: 100%;
+  max-width: 70rem;
+  min-width: 420px;
+  margin: 0 auto;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+
+  img {
+    width: 6.25rem;
+  }
+}

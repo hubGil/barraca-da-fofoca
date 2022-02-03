@@ -4,18 +4,19 @@
   box-sizing: border-box;
 }
 :root {
-  --white: #fff;
+  --white-200: #f1f1f1;
+  --white-100: #ffffff;
+
   --gray-100: #e1e1e6;
   --gray-300: #a8a8b3;
-  --gray-900: #121214;
-
+  --gray-900: #333333;
   --cyan-500: #61dafb;
-  --yellow-500: #eba417;
+  --orange-100: #fd812f;
 }
 
 body {
-  background-color: var(--gray-900);
-  color: var(--white);
+  background-color: var(--white-200);
+  color: var(--gray-900);
 }
 
 body,
