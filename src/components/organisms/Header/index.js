@@ -11,7 +11,7 @@ export function Header() {
   const menuId = "main-menu";
   return (
     <header className={styles.header_container}>
-      <img src="./images/logo.png" alt="Logo barraca da fofoca" />
+      <img src="../images/logo.png" alt="Logo barraca da fofoca" />
 
       <BtnHamburg open={open} setOpen={setOpen} aria-controls={menuId} />
 

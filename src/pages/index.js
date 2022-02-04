@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.scss";
 import ApiImdb from "../services/api-imdb";
+import Image from "next/image";
 
 export default function Home() {
   const [results, setResults] = useState([]);
@@ -11,12 +12,12 @@ export default function Home() {
     const { data } = await ApiImdb.getAutoComplete(search);
     setSearch(() => "");
     // const [listName, name, ...rest] = data;'
-    const famousName = data.d[0].id;
+    // const famousName = data.d[0].id;
 
-    const response = await ApiImdb.getFamousInfo(famousName);
-    console.log(response.data);
+    // const response = await ApiImdb.getFamousInfo(famousName);
+    // console.log(response.data);
 
-    // setResults(result.d);
+    setResults(data.d);
   };
 
   const handleSubmit = (text) => {
@@ -59,8 +60,29 @@ export default function Home() {
               placeholder="digite o nome do artista"
             />
             <button onClick={fetchResults}>Buscar</button>
+            <div className={styles.list}>
+              {results.filter(item => {
+                return item.s.includes('Actor') || item.s.includes('Actress');
+              }).map((res, k) => {
+                return (
+                  <a key={k} href={`/fofoca/${res.id}`}>
+                    <div className={styles.list__item}>
+                      <div className={styles.list__item__img_container}>
+                        <Image
+                          src={res.i.imageUrl}
+                          alt={res.l}
+                          width={res.i.width}
+                          height={res.i.height}
+                        />
+                      </div>
+                      <p value={res.id}>{res.l}</p>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
-          <img src="/images/hero-right.png" alt="" />
+          <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />
         </div>
       </main>
     </>
