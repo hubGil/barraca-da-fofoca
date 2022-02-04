@@ -1,0 +1,56 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+
+  span {
+    width: 2rem;
+    height: 0.25rem;
+
+    background-color: var(--gray-900);
+    border-radius: 0.625rem;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 0.0625rem;
+
+    &:first-child {
+      transform: rotate(45deg);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    &:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.buttonContainer_open {
+  span {
+    background-color: var(--orange-100);
+    &:first-child {
+      transform: rotate(0);
+    }
+    &:nth-child(2) {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    &:nth-child(3) {
+      transform: rotate(0);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .buttonContainer {
+    display: none;
+  }
+}
