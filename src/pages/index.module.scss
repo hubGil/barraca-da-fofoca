@@ -69,6 +69,35 @@
       filter: brightness(0.8);
     }
   }
+  .list {
+    background-color: var(--white-100);
+    max-width: 25rem;
+    max-height: 12em;
+    overflow-y: scroll;
+    p {
+      font-size: 1.2rem;
+      margin-left: 1rem;
+    }
+  }
+  .list__item {
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-900);
+    p{
+      color: var(--gray-900);
+    }
+
+    &:hover{
+      background-color:var(--orange-100);
+    }
+  }
+  .list__item__img_container{
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+  }
 }
 
 @media (min-width: 414px) {
