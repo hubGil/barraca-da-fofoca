@@ -15,7 +15,7 @@ export function Header() {
   if (session) {
     return (
       <header className={styles.header_container}>
-        <img src="./images/logo.png" alt="Logo barraca da fofoca" />
+        <img src="/images/logo.png" alt="Logo barraca da fofoca" />
         <BtnHamburg open={open} setOpen={setOpen} aria-controls={menuId} />
         <Menu open={open} setOpen={setOpen} aria-controls={menuId} />
         Signed in as {session.user.email} <br />
@@ -25,7 +25,7 @@ export function Header() {
   } else {
     return (
       <header className={styles.header_container}>
-        <img src="./images/logo.png" alt="Logo barraca da fofoca" />
+        <img src="/images/logo.png" alt="Logo barraca da fofoca" />
         <BtnHamburg open={open} setOpen={setOpen} aria-controls={menuId} />
         <Menu open={open} setOpen={setOpen} aria-controls={menuId} />
         Not signed in <br />
