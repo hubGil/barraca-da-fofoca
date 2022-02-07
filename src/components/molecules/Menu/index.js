@@ -1,6 +1,6 @@
 import { ActiveLink } from "../../atoms/ActiveLink";
 import styles from "./styles.module.scss";
-
+import { SignInButton } from "../../atoms/SignInButton";
 export function Menu({ open, ...props }) {
   const isHidden = open ? true : false;
   const tabIndex = isHidden ? 0 : -1;
@@ -27,6 +27,9 @@ export function Menu({ open, ...props }) {
           <ActiveLink href="/bofe" activeClassName={styles.active}>
             <a tabIndex={tabIndex}>Bofe</a>
           </ActiveLink>
+        </li>
+        <li>
+          <SignInButton />
         </li>
       </ul>
     </nav>

@@ -11,9 +11,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  transition: none;
+  transition: transform 0.3s ease-in-out;
   box-shadow: 8px 0px 6px rgb(0 0 0 / 10%);
   z-index: 1;
+
   ul {
     list-style: none;
     display: flex;
@@ -41,6 +42,9 @@
           left: 0;
           background-color: var(--orange-100);
         }
+      }
+      button {
+        margin-top: 1rem;
       }
     }
   }
