@@ -15,11 +15,19 @@ export default {
   getAutoComplete(id) {
     return apiImdb.get("/auto-complete", { params: { q: id } });
   },
-
   getAllNews(id) {
     return apiImdb.get("/actors/get-all-news", { params: { nconst: id } });
   },
   getFamousInfo(id) {
     return apiImdb.get("/actors/get-bio", { params: { nconst: id } });
+  },
+  getKnownFor(id) {
+    return apiImdb.get("/actors/get-known-for", { params: { nconst: id } });
+  },
+  getAllImages(id) {
+    return apiImdb.get("/actors/get-all-images", { params: { nconst: id } });
+  },
+  getAllNews(id) {
+    return apiImdb.get("/actors/get-all-news", { params: { nconst: id } });
   },
 };

@@ -1,0 +1,38 @@
+.tabs {
+  width: 100%;
+
+  &__list {
+    display: flex;
+    border-bottom: 2px solid #DFE2E3;
+    list-style: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+  }
+
+  &__tab {
+    display: inline-block;
+  }
+
+  &__tab-link {
+    display: inline-block;
+    text-align: center;
+    padding: 30px;
+    color: rgba(#052843, .65);
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    text-decoration: none !important;
+
+    &--active {
+      color: #052843;
+      font-weight: bold;
+      border-color: #23AAE0;
+    }
+  }
+
+  &__content {
+    margin: 30px auto;
+    width: 100%;
+  }
+}
