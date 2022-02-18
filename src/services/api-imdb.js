@@ -7,7 +7,7 @@ const apiImdb = axios.create({
   withCredentials: false,
   headers: {
     "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    "x-rapidapi-key": "1e9b7d195cmshb669202f8842d16p1a42a2jsncaa10ba319cf",
+    "x-rapidapi-key": "5506b3f4demshf9c8218eea992ddp1b2390jsn59b2537af677",
   },
 });
 
