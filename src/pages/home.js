@@ -1,23 +1,32 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import ApiTvmaze from "../services/api-tvmaze";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const [results, setResults] = useState([]);
-  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]); // API results
+  const [search, setSearch] = useState(""); // input value
+  const [searchActive, setSearchActive] = useState(false); // Show/NotShow search result
 
   const fetchResults = async () => {
     const { data } = await ApiTvmaze.searchPersonName(search);
-    console.log('data==>', data);
     setResults(data);
+    setSearchActive(true);
   };
 
   const handleSubmit = (text) => {
     setSearch(text.target.value);
+    setSearchActive(false);
   };
+
+  useEffect(() => {
+    if(!search) {
+      setSearchActive(false);
+      setResults('');
+    }
+  });
 
   return (
     <>
@@ -40,12 +49,9 @@ export default function Home() {
 
             {/* Search results */}
             <div className={styles.list}>
-              {
+              {/* Results */}
+              { (!!results.length && searchActive) &&
                 results.map((res, index) => {
-                    console.log('res=>', res);
-                    const artist = res;
-                    const urlSlug = `/artist/${res?.person?.id}`;
-                    console.log('urlSlug=>', urlSlug);
                 return (
                   <Link
                     key={index}
@@ -58,22 +64,40 @@ export default function Home() {
 
                     <a className={styles.list__item} test={res}>
                         {
-                          // TODO: add image fallback
                             res?.person?.image &&
                             <div className={styles.list__item__img_container}>
                                 <Image
-                                src={res?.person?.image?.medium}
-                                alt={res?.person?.name}
-                                width={30}
-                                height={30}
+                                  src={res?.person?.image?.medium}
+                                  alt={res?.person?.name}
+                                  width={30}
+                                  height={30}
                                 />
                             </div>
+                        }
+                        {
+                          // Image fallback
+                          !res?.person?.image && 
+                          <div className={styles.list__item__img_container}>
+                            <Image
+                              src="https://via.placeholder.com/30x30.png?text=X"
+                              alt={res?.person?.name}
+                              width={30}
+                              height={30}
+                            />
+                          </div>
                         }
                       <p>{res?.person?.name}</p>
                     </a>
                   </Link>
                 );
               })}
+              {/* No results */}
+              {
+                (!results?.length && searchActive) &&
+                <div className={styles.list__item}>
+                  Sem resultados
+                </div>
+              }
             </div>
           </div>
           <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />

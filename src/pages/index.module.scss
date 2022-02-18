@@ -78,7 +78,7 @@
     background-color: var(--white-100);
     max-width: 25rem;
     max-height: 12em;
-    overflow-y: scroll;
+    overflow-y: auto;
     p {
       font-size: 1.2rem;
       margin-left: 1rem;
@@ -95,6 +95,10 @@
 
     &:hover{
       background-color:var(--orange-100);
+    }
+
+    &:last-child {
+      border-bottom: none;
     }
   }
   .list__item__img_container{

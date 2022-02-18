@@ -34,11 +34,22 @@ export default function Artist( {dataFinal} ) {
         <div className={styles.column}>
           <h1>Artist - {dataFinal?.name}</h1>
           <div style={{ display: "block", position: "relative" }}>
-            <img
-              className={styles.noResize}
-              src={dataFinal?.image.medium}
-              alt={dataFinal?.name}
-            />
+            {
+              dataFinal?.image?.medium && 
+              <img
+                className={styles.noResize}
+                src={dataFinal?.image?.medium}
+                alt={dataFinal?.name}
+              />
+            }
+            {
+              !dataFinal?.image?.medium && 
+              <img
+                className={styles.noResize}
+                src="https://via.placeholder.com/210x295.png?text=Sem+Imagem"
+                alt={dataFinal?.name}
+              />
+            }
           </div>
         </div>
         <div>
