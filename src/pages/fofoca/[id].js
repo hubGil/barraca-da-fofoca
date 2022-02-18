@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import styles from "../index.module.scss";
 import ApiImdb from "../../services/api-imdb";
@@ -6,10 +5,6 @@ import { formatDateBR } from "../../helpers/formater";
 
 export default function Fofoca({ famous }) {
   return (
-    <>
-      <Head>
-        <title>Home | Barraca da Fofoca</title>
-      </Head>
       <div className={styles.container}>
         <div>
           <h1>Famous - {famous?.name}</h1>
@@ -27,7 +22,6 @@ export default function Fofoca({ famous }) {
           <h2>Local de nascimento: {famous?.birthPlace}</h2>
         </div>
       </div>
-    </>
   );
 }
 

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import ApiTvmaze from "../services/api-tvmaze";
@@ -29,11 +28,6 @@ export default function Home() {
   });
 
   return (
-    <>
-      <Head>
-        <title>Home | Barraca da Fofoca</title>
-      </Head>
-
       <main>
         <div className={styles.container}>
           <div className={styles.contant}>
@@ -103,6 +97,5 @@ export default function Home() {
           <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />
         </div>
       </main>
-    </>
   );
 }
