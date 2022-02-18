@@ -1,12 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "./styles.module.scss";
+import styles from "../index.module.scss";
 import { formatDateBR } from "../../helpers/formater";
 import ApiTvmaze from "../../services/api-tvmaze";
-import ApiImdb from "../../services/api-imdb";
 
-
-console.log('styles==>', styles);
 
 export async function getStaticPaths() {
   return {
@@ -16,13 +12,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  // console.log('context.params===>', context.params);
-  // console.log('context===>', context);
   const data = await ApiTvmaze.getPersonData(context.params.id);
   const res = await data.data;
-  console.log('res==>', res);
+  // NextJs doesn't like numbers as ids. Converting to string fix it.
   const dataFinal = {...res, id : JSON.stringify(res.id)};
-  console.log('dataFinal=', dataFinal);
   return {
     props: {
       dataFinal,
@@ -42,6 +35,7 @@ export default function Artist( {dataFinal} ) {
           <h1>Artist - {dataFinal?.name}</h1>
           <div style={{ display: "block", position: "relative" }}>
             <img
+              className={styles.noResize}
               src={dataFinal?.image.medium}
               alt={dataFinal?.name}
             />

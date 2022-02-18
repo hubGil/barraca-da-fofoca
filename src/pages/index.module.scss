@@ -10,6 +10,11 @@
   img {
     width: 280px;
     margin: 0 auto;
+
+    &.noResize {
+      width: inherit;
+      height: auto;
+    }
   }
 }
 
@@ -105,6 +110,11 @@
     justify-content: space-evenly;
     img {
       width: 320px;
+
+      &.noResize {
+        width: inherit;
+        height: auto;
+      }
     }
   }
 }
@@ -114,6 +124,11 @@
     justify-content: space-evenly;
     img {
       width: 600px;
+
+      &.noResize {
+        width: inherit;
+        height: auto;
+      }
     }
   }
 }
@@ -127,6 +142,11 @@
     img {
       width: 500px;
       height: 500px;
+
+      &.noResize {
+        width: inherit;
+        height: auto;
+      }
     }
   }
   .contant {
