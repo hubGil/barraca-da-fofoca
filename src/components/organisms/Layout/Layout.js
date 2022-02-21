@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     return (
         // Fragment (empty tag <>)
         <>
-            <SiteHead children={children}/>
+            <SiteHead Title={children.type.name}/>
             <div className="content">
                 <Header />
                 { children }

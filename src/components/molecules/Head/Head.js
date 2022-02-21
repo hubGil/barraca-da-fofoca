@@ -1,10 +1,10 @@
 import Head from "next/head";
 
-const SiteHead = ({ children }) => {
+const SiteHead = ({ Title }) => {
   return (
     <Head>
       {/* Name page dynamic */}
-      <title>{children.type.name} | Barraca da Fofoca</title>
+      <title>{Title} | Barraca da Fofoca</title>
 
       {/* Meta tags */}
       <meta name="keywords" content="barraca da fofoca" />
