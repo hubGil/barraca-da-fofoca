@@ -1,4 +1,3 @@
-import Head from "next/head";
 import styles from "../index.module.scss";
 import { formatDateBR } from "../../helpers/formater";
 import ApiTvmaze from "../../services/api-tvmaze";
@@ -26,10 +25,6 @@ export async function getStaticProps(context) {
 
 export default function Artist( {dataFinal} ) {
   return (
-    <>
-      <Head>
-        <title>Home | Barraca da Fofoca</title>
-      </Head>
       <div className={styles.container}>
         <div className={styles.column}>
           <h1>Artist - {dataFinal?.name}</h1>
@@ -57,6 +52,5 @@ export default function Artist( {dataFinal} ) {
           <h2>Local de nascimento: {dataFinal?.country?.name}</h2>
         </div>
       </div>
-    </>
   );
 }
