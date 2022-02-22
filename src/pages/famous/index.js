@@ -53,12 +53,12 @@ export const getStaticProps = async () => {
   );
 
   const posts = response.results.map((post) => ({
-    slug: post.uid,
-    title: RichText.asText(post.data.title),
+    slug: post.uid ||"",
+    title: RichText.asText(post.data.title)||"" ,
     description: post.data.description.find(
       (content) => content.type === "paragraph"
-    ).text,
-    img: post.data.img.url,
+    ).text || "",
+    img: post.data.img.url || "",
     updatedAt: new Date(post.last_publication_date).toLocaleDateString(
       "pt-BR",
       {
