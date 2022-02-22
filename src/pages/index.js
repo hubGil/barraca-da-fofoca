@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.scss";
 import ApiImdb from "../services/api-imdb";
@@ -26,9 +25,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Home | Barraca da Fofoca</title>
-      </Head>
       {/* <h1>Home</h1>
       <div
         style={{

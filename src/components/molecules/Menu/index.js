@@ -2,13 +2,11 @@ import { ActiveLink } from "../../atoms/ActiveLink";
 import styles from "./styles.module.scss";
 import { SignInButton } from "../../atoms/SignInButton";
 export function Menu({ open, ...props }) {
-  const isHidden = open ? true : false;
-  const tabIndex = isHidden ? 0 : -1;
+const tabIndex = open ? 0 : -1;
 
   return (
     <nav
-      open={open}
-      aria-hidden={!isHidden}
+      aria-hidden={!open}
       {...props}
       className={`${styles.nav} ${open ? styles.nav_open : ""}`}
     >
@@ -29,6 +27,7 @@ export function Menu({ open, ...props }) {
           </ActiveLink>
         </li>
         <li>
+          {/* TODO: fix focus */}
           <SignInButton />
         </li>
       </ul>

@@ -14,8 +14,8 @@ export function Header() {
   return (
     <header className={styles.header_container}>
       <img src="/images/logo.png" alt="Logo barraca da fofoca" />
-      <BtnHamburg open={open} setOpen={setOpen} aria-controls={menuId} />
-      <Menu open={open} setOpen={setOpen} aria-controls={menuId} />
+      <BtnHamburg open={open} setopen={setOpen} aria-controls={menuId} />
+      <Menu open={open} aria-controls={menuId} />
     </header>
   );
 }

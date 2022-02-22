@@ -11,6 +11,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Merienda+One&family=Playfair+Display:wght@400;700;800;900&display=swap"
             rel="stylesheet"
           />
+          <meta name="keywords" content="test" />
         </Head>
         <body>
           <Main />
