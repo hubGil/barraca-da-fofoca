@@ -5,19 +5,19 @@ import ApiImdb from "../services/api-imdb";
 import Image from "next/image";
 
 export default function Home() {
-  const [results, setResults] = useState([]);
+  const [famous, setFamous] = useState([]);
   const [search, setSearch] = useState("");
 
   const fetchResults = async () => {
     const { data } = await ApiImdb.getAutoComplete(search);
-    setSearch(() => "");
+
     // const [listName, name, ...rest] = data;'
     // const famousName = data.d[0].id;
 
     // const response = await ApiImdb.getFamousInfo(famousName);
     // console.log(response.data);
 
-    setResults(data.d);
+    setFamous(data.d);
   };
 
   const handleSubmit = (text) => {
@@ -61,28 +61,35 @@ export default function Home() {
             />
             <button onClick={fetchResults}>Buscar</button>
             <div className={styles.list}>
-              {results.filter(item => {
-                return item.s.includes('Actor') || item.s.includes('Actress');
-              }).map((res, k) => {
-                return (
-                  <a key={k} href={`/fofoca/${res.id}`}>
-                    <div className={styles.list__item}>
-                      <div className={styles.list__item__img_container}>
-                        <Image
-                          src={res.i.imageUrl}
-                          alt={res.l}
-                          width={res.i.width}
-                          height={res.i.height}
-                        />
+              {famous
+                .filter((item) => {
+                  return item.s.includes("Actor") || item.s.includes("Actress");
+                })
+                .map((res, k) => {
+                  return (
+                    <a key={k} href={`/fofoca/${res.id}`}>
+                      <div className={styles.list__item}>
+                        <div className={styles.list__item__img_container}>
+                          <Image
+                            src={res.i?.imageUrl}
+                            alt={res.l}
+                            width={res.i?.width}
+                            height={res.i?.height}
+                          />
+                        </div>
+                        <p value={res.id}>{res.l}</p>
                       </div>
-                      <p value={res.id}>{res.l}</p>
-                    </div>
-                  </a>
-                );
-              })}
+                    </a>
+                  );
+                })}
             </div>
           </div>
-          <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />
+          <Image
+            src="/images/hero-right.png"
+            alt="Fofoca"
+            width={500}
+            height={500}
+          />
         </div>
       </main>
     </>

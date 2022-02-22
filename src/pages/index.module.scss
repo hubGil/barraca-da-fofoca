@@ -84,15 +84,15 @@
     padding: 0.5em;
     align-items: center;
     border-bottom: 1px solid var(--gray-900);
-    p{
+    p {
       color: var(--gray-900);
     }
 
-    &:hover{
-      background-color:var(--orange-100);
+    &:hover {
+      background-color: var(--orange-100);
     }
   }
-  .list__item__img_container{
+  .list__item__img_container {
     border-radius: 100px;
     width: 30px;
     height: 30px;
