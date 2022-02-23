@@ -28,7 +28,7 @@
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), v14.17.1.
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 ```bash
@@ -53,4 +53,28 @@ OD
 $ npm run dev
 
 #  acesse <http://localhost:3000> para ver o resultado
+
+
 ```
+### Inclusão de componentes (Famous)
+
+https://prismic.io/dashboard/signup
+
+Criar novo repositório
+
+Settings / API & Security
+
+1 - Copiar e inserir no código a URL para ter acesso a API 
+
+2 - Permanent access tokens
+- Generate an Access Token / Application name / This name will be presented to the users.
+- Copiar e inserir no código "Access to master"
+
+3 - Custom Types
+- Criar o componente
+
+4 - Documents
+- Inserir o conteúdo dos componentes
+- Salvar
+- Publicar
+

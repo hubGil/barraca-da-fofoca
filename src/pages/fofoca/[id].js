@@ -17,9 +17,10 @@ export default function Fofoca({ famous }) {
             />
           </div>
         </div>
-        <div>
+        <div className={styles.contant}>
           <h2>Data de nascimento: {formatDateBR(famous?.birthDate)}</h2>
           <h2>Local de nascimento: {famous?.birthPlace}</h2>
+          <button>+ Bofe</button>
         </div>
       </div>
   );
