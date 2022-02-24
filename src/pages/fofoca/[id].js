@@ -3,23 +3,23 @@ import styles from "../index.module.scss";
 import ApiImdb from "../../services/api-imdb";
 import { formatDateBR } from "../../helpers/formater";
 
-export default function Fofoca({ famous }) {
+export default function Fofoca({ about }) {
   return (
       <div className={styles.container}>
         <div>
-          <h1>Famous - {famous?.name}</h1>
+          <h1>About - {about?.name}</h1>
           <div style={{ width: 300, height: "auto" }}>
             <Image
-              width={famous?.image.width}
-              height={famous?.image.height}
-              src={famous?.image.url}
-              alt={famous?.name}
+              width={about?.image.width}
+              height={about?.image.height}
+              src={about?.image.url}
+              alt={about?.name}
             />
           </div>
         </div>
         <div className={styles.contant}>
-          <h2>Data de nascimento: {formatDateBR(famous?.birthDate)}</h2>
-          <h2>Local de nascimento: {famous?.birthPlace}</h2>
+          <h2>Data de nascimento: {formatDateBR(about?.birthDate)}</h2>
+          <h2>Local de nascimento: {about?.birthPlace}</h2>
           <button>+ Bofe</button>
         </div>
       </div>
@@ -29,11 +29,11 @@ export default function Fofoca({ famous }) {
 export async function getStaticProps({ params }) {
   const { id } = params;
 
-  const { data: famous } = await ApiImdb.getFamousInfo(id);
+  const { data: about } = await ApiImdb.getAboutInfo(id);
 
   return {
     props: {
-      famous,
+      about,
     },
     revalidate: 60 * 60 * 24, // Update every 24 hours
   };

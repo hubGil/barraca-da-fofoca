@@ -5,13 +5,13 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { RichText } from "prismic-dom";
 import { getPrismicClient } from "../../services/prismic";
-export default function Famous({ posts }) {
+export default function About({ posts }) {
   const { data: session } = useSession();
   console.log(session);
   return (
     <>
       <Head>
-        <title>Famous | Barraca da Fofoca</title>
+        <title>About | Barraca da Fofoca</title>
       </Head>
 
       <main className={`${styles.container} `}>
@@ -23,9 +23,11 @@ export default function Famous({ posts }) {
           {posts.map((post) => (
             <Link key={post.uid} href="#">
               <a>
-                <time>{post.updatedAt}</time>
-                <strong>{post.title}</strong>
-                <p>{post.description}</p>
+                <img src={post.img} />
+                <div>
+                  <strong>{post.title}</strong>
+                  <p>{post.description}</p>
+                </div>
               </a>
             </Link>
           ))}

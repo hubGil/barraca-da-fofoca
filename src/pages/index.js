@@ -4,19 +4,19 @@ import ApiImdb from "../services/api-imdb";
 import Image from "next/image";
 
 export default function Home() {
-  const [famous, setFamous] = useState([]);
+  const [about, setAbout] = useState([]);
   const [search, setSearch] = useState("");
 
   const fetchResults = async () => {
     const { data } = await ApiImdb.getAutoComplete(search);
 
     // const [listName, name, ...rest] = data;'
-    // const famousName = data.d[0].id;
+    // const aboutName = data.d[0].id;
 
-    // const response = await ApiImdb.getFamousInfo(famousName);
+    // const response = await ApiImdb.getAboutInfo(aboutName);
     // console.log(response.data);
 
-    setFamous(data.d);
+    setAbout(data.d);
   };
 
   const handleSubmit = (text) => {
@@ -57,7 +57,7 @@ export default function Home() {
             />
             <button onClick={fetchResults}>Buscar</button>
             <div className={styles.list}>
-              {famous
+              {about
                 .filter((item) => {
                   return item.s.includes("Actor") || item.s.includes("Actress");
                 })

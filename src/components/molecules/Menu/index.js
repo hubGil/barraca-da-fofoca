@@ -17,13 +17,13 @@ const tabIndex = open ? 0 : -1;
           </ActiveLink>
         </li>
         <li>
-          <ActiveLink href="/famous" activeClassName={styles.active}>
-            <a tabIndex={tabIndex}>Famous</a>
+          <ActiveLink href="/bofe" activeClassName={styles.active}>
+            <a tabIndex={tabIndex}>Bofe</a>
           </ActiveLink>
         </li>
         <li>
-          <ActiveLink href="/bofe" activeClassName={styles.active}>
-            <a tabIndex={tabIndex}>Bofe</a>
+          <ActiveLink href="/about" activeClassName={styles.active}>
+            <a tabIndex={tabIndex}>About</a>
           </ActiveLink>
         </li>
         <li>
