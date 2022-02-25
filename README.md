@@ -14,8 +14,8 @@
   - [ ] header
   - [ ] main
   - [ ] footer
-- [ ] Página Famous
 - [ ] Página Bofe
+- [ ] Página About
 
 ## Exemplo da aplicação
 
@@ -56,7 +56,7 @@ $ npm run dev
 
 
 ```
-### Inclusão de componentes (Famous)
+### Inclusão de componentes (About)
 
 https://prismic.io/dashboard/signup
 

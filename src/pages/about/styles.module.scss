@@ -10,12 +10,21 @@
   margin: 80px auto 0;
 
   a {
-    display: block;
+    display: flex;
+    align-items: center;
 
     & + a {
       margin-top: 32px;
       padding-top: 32px;
       border-top: 0.0625rem solid var(--gray-700);
+    }
+
+    img {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      border: var(--orange-100) 3px solid;
+      margin-right: 50px;
     }
 
     time {

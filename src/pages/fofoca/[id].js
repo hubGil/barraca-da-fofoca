@@ -18,37 +18,38 @@ export default function Fofoca({ famous, id }) {
     }
   }
 
+export default function Fofoca({ about }) {
   return (
-    <div className={styles.container}>
-      <div>
-        <h1>Famous - {famous?.name}</h1>
-        <div style={{ width: 300, height: "auto" }}>
-          <Image
-            width={famous?.image.width}
-            height={famous?.image.height}
-            src={famous?.image.url}
-            alt={famous?.name}
-          />
+      <div className={styles.container}>
+        <div>
+          <h1>About - {about?.name}</h1>
+          <div style={{ width: 300, height: "auto" }}>
+            <Image
+              width={about?.image.width}
+              height={about?.image.height}
+              src={about?.image.url}
+              alt={about?.name}
+            />
+          </div>
+        </div>
+        <div className={styles.contant}>
+          <h2>Data de nascimento: {formatDateBR(about?.birthDate)}</h2>
+          <h2>Local de nascimento: {about?.birthPlace}</h2>
+          <button>+ Bofe</button>
         </div>
       </div>
-      <div className={styles.contant}>
-        <h2>Data de nascimento: {formatDateBR(famous?.birthDate)}</h2>
-        <h2>Local de nascimento: {famous?.birthPlace}</h2>
-        <button onClick={addBofe}>+ Bofe</button>
-      </div>
-    </div>
   );
 }
 
 export async function getStaticProps({ params }) {
   const { id } = params;
 
-  const { data: famous } = await ApiImdb.getFamousInfo(id);
+  const { data: about } = await ApiImdb.getAboutInfo(id);
 
   return {
     props: {
-      famous,
-      id,
+      about,
+      id
     },
     revalidate: 60 * 60 * 24, // Update every 24 hours
   };

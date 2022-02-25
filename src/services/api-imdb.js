@@ -19,7 +19,7 @@ export default {
   getAllNews(id) {
     return apiImdb.get("/actors/get-all-news", { params: { nconst: id } });
   },
-  getFamousInfo(id) {
+  getAboutInfo(id) {
     return apiImdb.get("/actors/get-bio", { params: { nconst: id } });
   },
 };
