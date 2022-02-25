@@ -13,8 +13,6 @@ export default function Fofoca({ famous, id }) {
 
     try {
       const response = await axios.post("/api/bofe", { bofe: id });
-
-      console.log(response);
     } catch (e) {
       console.log(e);
     }
