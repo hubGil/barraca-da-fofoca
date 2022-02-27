@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <main>
       <div className={styles.container}>
-        <div className={styles.contant}>
+        <div className={styles.content}>
           <h1>Barraca da fofoca</h1>
           <p>Saiba o que andam falando do seu artista favorito</p>
           <input
@@ -38,6 +38,7 @@ export default function Home() {
             onChange={handleSubmit}
             value={search}
             placeholder="digite o nome do artista"
+            onKeyDown={(e) => (e.key === "Enter" ? fetchResults() : "")}
           />
           <button onClick={fetchResults}>Buscar</button>
 
