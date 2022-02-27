@@ -16,7 +16,7 @@ const teste = async (req, res) => {
     }
   }
 
-  return res.status(200).json({ message: "teste" });
+  return res.status(200).json({ message: "suss" });
 };
 
 export default teste;
