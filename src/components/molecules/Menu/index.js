@@ -2,7 +2,7 @@ import { ActiveLink } from "../../atoms/ActiveLink";
 import styles from "./styles.module.scss";
 import { SignInButton } from "../../atoms/SignInButton";
 export function Menu({ open, ...props }) {
-const tabIndex = open ? 0 : -1;
+  const tabIndex = open ? 0 : -1;
 
   return (
     <nav
@@ -17,13 +17,13 @@ const tabIndex = open ? 0 : -1;
           </ActiveLink>
         </li>
         <li>
-          <ActiveLink href="/famous" activeClassName={styles.active}>
-            <a tabIndex={tabIndex}>Famous</a>
+          <ActiveLink href="/bofe" activeClassName={styles.active}>
+            <a tabIndex={tabIndex}>Bofe</a>
           </ActiveLink>
         </li>
         <li>
-          <ActiveLink href="/bofe" activeClassName={styles.active}>
-            <a tabIndex={tabIndex}>Bofe</a>
+          <ActiveLink href="/about" activeClassName={styles.active}>
+            <a tabIndex={tabIndex}>About</a>
           </ActiveLink>
         </li>
         <li>
