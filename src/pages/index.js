@@ -21,56 +21,55 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if(!search) {
+    if (!search) {
       setSearchActive(false);
-      setResults('');
+      setResults("");
     }
-  });
+  }, [search]);
 
   return (
-      <main>
-        <div className={styles.container}>
-          <div className={styles.contant}>
-            <h1>Barraca da fofoca</h1>
-            <p>Saiba o que andam falando do seu artista favorito</p>
-            <input
-              type="text"
-              onChange={handleSubmit}
-              value={search}
-              placeholder="digite o nome do artista"
-            />
-            <button onClick={fetchResults}>Buscar</button>
+    <main>
+      <div className={styles.container}>
+        <div className={styles.contant}>
+          <h1>Barraca da fofoca</h1>
+          <p>Saiba o que andam falando do seu artista favorito</p>
+          <input
+            type="text"
+            onChange={handleSubmit}
+            value={search}
+            placeholder="digite o nome do artista"
+          />
+          <button onClick={fetchResults}>Buscar</button>
 
-            {/* Search results */}
-            <div className={styles.list}>
-              {/* Results */}
-              { (!!results.length && searchActive) &&
-                results.map((res, index) => {
+          {/* Search results */}
+          <div className={styles.list}>
+            {/* Results */}
+            {!!results.length &&
+              searchActive &&
+              results.map((res, index) => {
                 return (
                   <Link
                     key={index}
                     href={{
-                      pathname:  `/artist/${res?.person?.id}`,
-                      query: {data: 'test0', data1: 'teste1'}
+                      pathname: `/artist/${res?.person?.id}`,
+                      query: { data: "test0", data1: "teste1" },
                     }}
                     as={`/artist/${res?.person?.id}`}
                   >
-
                     <a className={styles.list__item} test={res}>
-                        {
-                            res?.person?.image &&
-                            <div className={styles.list__item__img_container}>
-                                <Image
-                                  src={res?.person?.image?.medium}
-                                  alt={res?.person?.name}
-                                  width={30}
-                                  height={30}
-                                />
-                            </div>
-                        }
-                        {
-                          // Image fallback
-                          !res?.person?.image && 
+                      {res?.person?.image && (
+                        <div className={styles.list__item__img_container}>
+                          <Image
+                            src={res?.person?.image?.medium}
+                            alt={res?.person?.name}
+                            width={30}
+                            height={30}
+                          />
+                        </div>
+                      )}
+                      {
+                        // Image fallback
+                        !res?.person?.image && (
                           <div className={styles.list__item__img_container}>
                             <Image
                               src="https://via.placeholder.com/30x30.png?text=X"
@@ -79,23 +78,26 @@ export default function Home() {
                               height={30}
                             />
                           </div>
-                        }
+                        )
+                      }
                       <p>{res?.person?.name}</p>
                     </a>
                   </Link>
                 );
               })}
-              {/* No results */}
-              {
-                (!results?.length && searchActive) &&
-                <div className={styles.list__item}>
-                  Sem resultados
-                </div>
-              }
-            </div>
+            {/* No results */}
+            {!results?.length && searchActive && (
+              <div className={styles.list__item}>Sem resultados</div>
+            )}
           </div>
-          <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />
         </div>
-      </main>
+        <Image
+          src="/images/hero-right.png"
+          alt="Fofoca"
+          width={500}
+          height={500}
+        />
+      </div>
+    </main>
   );
 }
