@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import ApiImdb from "../services/api-imdb";
+import ApiTvmaze from "../services/api-tvmaze";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+<<<<<<< HEAD
   const [about, setAbout] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -17,24 +19,46 @@ export default function Home() {
     // console.log(response.data);
 
     setAbout(data.d);
+=======
+  const [results, setResults] = useState([]); // API results
+  const [search, setSearch] = useState(""); // input value
+  const [searchActive, setSearchActive] = useState(false); // Show/NotShow search result
+
+  const fetchResults = async () => {
+    const { data } = await ApiTvmaze.searchPersonName(search);
+    setResults(data);
+    setSearchActive(true);
+>>>>>>> add-newHome
   };
 
   const handleSubmit = (text) => {
     setSearch(text.target.value);
+    setSearchActive(false);
   };
 
-  return (
-    <>
-      {/* <h1>Home</h1>
-      <div
-        style={{
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+  useEffect(() => {
+    if (!search) {
+      setSearchActive(false);
+      setResults("");
+    }
+  }, [search]);
 
+  return (
+    <main>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>Barraca da fofoca</h1>
+          <p>Saiba o que andam falando do seu artista favorito</p>
+          <input
+            type="text"
+            onChange={handleSubmit}
+            value={search}
+            placeholder="digite o nome do artista"
+            onKeyDown={(e) => (e.key === "Enter" ? fetchResults() : "")}
+          />
+          <button onClick={fetchResults}>Buscar</button>
+
+<<<<<<< HEAD
         <main>
 
         </main>
@@ -65,29 +89,65 @@ export default function Home() {
                   return (
                     <a key={k} href={`/fofoca/${res.id}`}>
                       <div className={styles.list__item}>
+=======
+          {/* Search results */}
+          <div className={styles.list}>
+            {/* Results */}
+            {!!results.length &&
+              searchActive &&
+              results.map((res, index) => {
+                return (
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: `/artist/${res?.person?.id}`,
+                      query: { data: "test0", data1: "teste1" },
+                    }}
+                    as={`/artist/${res?.person?.id}`}
+                  >
+                    <a className={styles.list__item} test={res}>
+                      {res?.person?.image && (
+>>>>>>> add-newHome
                         <div className={styles.list__item__img_container}>
                           <Image
-                            src={res.i?.imageUrl}
-                            alt={res.l}
-                            width={res.i?.width}
-                            height={res.i?.height}
+                            src={res?.person?.image?.medium}
+                            alt={res?.person?.name}
+                            width={30}
+                            height={30}
                           />
                         </div>
-                        <p value={res.id}>{res.l}</p>
-                      </div>
+                      )}
+                      {
+                        // Image fallback
+                        !res?.person?.image && (
+                          <div className={styles.list__item__img_container}>
+                            <Image
+                              src="https://via.placeholder.com/30x30.png?text=X"
+                              alt={res?.person?.name}
+                              width={30}
+                              height={30}
+                            />
+                          </div>
+                        )
+                      }
+                      <p>{res?.person?.name}</p>
                     </a>
-                  );
-                })}
-            </div>
+                  </Link>
+                );
+              })}
+            {/* No results */}
+            {!results?.length && searchActive && (
+              <div className={styles.list__item}>Sem resultados</div>
+            )}
           </div>
-          <Image
-            src="/images/hero-right.png"
-            alt="Fofoca"
-            width={500}
-            height={500}
-          />
         </div>
-      </main>
-    </>
+        <Image
+          src="/images/hero-right.png"
+          alt="Fofoca"
+          width={500}
+          height={500}
+        />
+      </div>
+    </main>
   );
 }
