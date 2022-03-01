@@ -1,13 +1,13 @@
-import Fofoca from "./fofoca/[id]";
 import styles from "./index.module.scss";
-import { faunaDBClient } from "../services/faunaDB";
-import { query as q } from "faunadb";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import ApiTvmaze from "../services/api-tvmaze";
 import { formatDateBR } from "../helpers/formater";
 import { useQuery } from "react-query";
+import { useBofe } from "../services/hooks/useBofes";
 
 export default function Bofe({ famous }) {
+  const { data: session } = useSession();
+
   return (
     <>
       {famous.map((famou) => (
