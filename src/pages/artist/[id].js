@@ -9,10 +9,8 @@ export default function Artist({ dataFinal }) {
 
   async function handleAddBofe() {
     if (!session) return;
-
     try {
       const response = await axios.post("/api/bofe", { bofe: dataFinal.id });
-
       console.log(response);
     } catch (e) {
       console.log(e);
