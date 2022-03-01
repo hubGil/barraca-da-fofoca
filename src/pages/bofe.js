@@ -5,6 +5,7 @@ import { query as q } from "faunadb";
 import { getSession } from "next-auth/react";
 import ApiTvmaze from "../services/api-tvmaze";
 import { formatDateBR } from "../helpers/formater";
+import { useQuery } from "react-query";
 
 export default function Bofe({ famous }) {
   return (
@@ -28,7 +29,8 @@ export default function Bofe({ famous }) {
 
 export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
-  console.log(session);
+  const { userBofes } = session;
+
   if (!session?.user) {
     return {
       redirect: {
@@ -38,18 +40,12 @@ export const getServerSideProps = async ({ req, res }) => {
     };
   }
 
-  const user = await faunaDBClient.query(
-    q.Get(q.Match(q.Index("user_by_email"), q.Casefold(session.user.email)))
-  );
-
   const famous = await Promise.all(
-    user.data.bofes.map(async (bofe) => {
+    userBofes.map(async (bofe) => {
       const { data } = await ApiTvmaze.getPersonData(bofe);
       return data;
     })
   );
-
-  console.log(famous);
 
   return {
     props: {
