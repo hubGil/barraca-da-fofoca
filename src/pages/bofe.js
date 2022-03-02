@@ -4,11 +4,9 @@ import ApiTvmaze from "../services/api-tvmaze";
 import { formatDateBR } from "../helpers/formater";
 import { useQuery } from "react-query";
 import { useBofe } from "../services/hooks/useBofes";
-import { useEffect } from "react/cjs/react.production.min";
+import { useEffect, useState } from "react";
 
 export default function Bofe({ famous }) {
-  const { data } = useSession();
-
   return (
     <>
       {famous.map((famou) => (
