@@ -6,25 +6,26 @@
 }
 
 .posts {
+  display: flex;
+  flex-direction: column-reverse;
   max-width: 720px;
   margin: 80px auto 0;
 
   a {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 
     & + a {
-      margin-top: 32px;
-      padding-top: 32px;
       border-top: 0.0625rem solid var(--gray-700);
     }
 
     img {
-      height: 150px;
-      width: 150px;
+      height: 80px;
+      min-width: 80px;
       border-radius: 50%;
-      border: var(--orange-100) 3px solid;
       margin-right: 50px;
+      object-fit: cover;
     }
 
     time {
