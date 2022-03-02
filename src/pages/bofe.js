@@ -4,9 +4,10 @@ import ApiTvmaze from "../services/api-tvmaze";
 import { formatDateBR } from "../helpers/formater";
 import { useQuery } from "react-query";
 import { useBofe } from "../services/hooks/useBofes";
+import { useEffect } from "react/cjs/react.production.min";
 
 export default function Bofe({ famous }) {
-  const { data: session } = useSession();
+  const { data } = useSession();
 
   return (
     <>
@@ -19,7 +20,7 @@ export default function Bofe({ famous }) {
           </div>
           <div className={styles.contant}>
             <h2>Data de nascimento: {formatDateBR(famou?.birthday)}</h2>
-            <h2>Local de nascimento: {famou?.country.name}</h2>
+            <h2>Local de nascimento: {famou?.country?.name}</h2>
           </div>
         </div>
       ))}

@@ -1,17 +1,20 @@
 import styles from "../index.module.scss";
 import { formatDateBR } from "../../helpers/formater";
+import { getSession, useSession } from "next-auth/react";
 import ApiTvmaze from "../../services/api-tvmaze";
-import { useSession } from "next-auth/react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
-export default function Artist({ dataFinal }) {
+export default function Artist({ dataFinal, btnVisibility }) {
+  const [btnView, setBtnView] = useState(btnVisibility);
+
   const { data: session } = useSession();
 
   async function handleAddBofe() {
     if (!session) return;
     try {
       const response = await axios.post("/api/bofe", { bofe: dataFinal.id });
-      console.log(response);
+      setBtnView(false);
     } catch (e) {
       console.log(e);
     }
@@ -41,27 +44,28 @@ export default function Artist({ dataFinal }) {
       <div>
         <h2>Data de nascimento: {formatDateBR(dataFinal?.birthday)}</h2>
         <h2>Local de nascimento: {dataFinal?.country?.name}</h2>
-        {session && <button onClick={handleAddBofe}>+ bofe</button>}
+
+        {btnView && <button onClick={handleAddBofe}>+ bofe</button>}
       </div>
     </div>
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking", // na grande maioria das vezes é melhor usar "blocking"
-  };
-}
+export async function getServerSideProps({ params, req }) {
+  const session = await getSession({ req });
 
-export async function getStaticProps(context) {
-  const data = await ApiTvmaze.getPersonData(context.params.id);
+  const data = await ApiTvmaze.getPersonData(params.id);
   const res = await data.data;
   // NextJs doesn't like numbers as ids. Converting to string fix it.
   const dataFinal = { ...res, id: JSON.stringify(res.id) };
+
+  const btnVisibility =
+    session && !session?.userBofes.find((bofe) => bofe === dataFinal.id);
+
   return {
     props: {
       dataFinal,
+      btnVisibility,
     }, // will be passed to the page component as props
   };
 }
