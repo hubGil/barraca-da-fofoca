@@ -16,7 +16,7 @@ export default function Bofe({ famous }) {
             <h1>{famou?.name}</h1>
             <div style={{ width: 300, height: "auto" }}></div>
           </div>
-          <div className={styles.contant}>
+          <div className={styles.content}>
             <h2>Data de nascimento: {formatDateBR(famou?.birthday)}</h2>
             <h2>Local de nascimento: {famou?.country?.name}</h2>
           </div>

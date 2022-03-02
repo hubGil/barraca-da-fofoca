@@ -16,9 +16,7 @@ export default function About({ posts }) {
 
       <main className={`${styles.container} `}>
         <div
-          className={`${styles.posts} ${
-            !session ? styles.previewContent : ""
-          } `}
+          className={`${styles.posts} `}
         >
           {posts.map((post) => (
             <Link key={post.uid} href="#">
@@ -32,15 +30,6 @@ export default function About({ posts }) {
             </Link>
           ))}
         </div>
-        {!session && (
-          <button
-            className={styles.continueReading}
-            onClick={() => signIn("github")}
-          >
-            <strong>Wanna continue reading?</strong>
-            <p>Signing now 🤗</p>
-          </button>
-        )}
       </main>
     </>
   );
