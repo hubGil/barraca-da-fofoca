@@ -13,8 +13,18 @@ export default function Artist({ dataFinal, btnVisibility }) {
   async function handleAddBofe() {
     if (!session) return;
     try {
-      const response = await axios.post("/api/bofe", { bofe: dataFinal.id });
+      await axios.post("/api/bofe", { bofe: dataFinal.id });
       setBtnView(false);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function handleRemoveBofe() {
+    if (!session) return;
+    try {
+      await axios.delete("/api/bofe", { data: { bofe: dataFinal.id } });
+      setBtnView(true);
     } catch (e) {
       console.log(e);
     }
@@ -44,8 +54,11 @@ export default function Artist({ dataFinal, btnVisibility }) {
       <div>
         <h2>Data de nascimento: {formatDateBR(dataFinal?.birthday)}</h2>
         <h2>Local de nascimento: {dataFinal?.country?.name}</h2>
+        {session && btnView && <button onClick={handleAddBofe}>AddBofe</button>}
 
-        {btnView && <button onClick={handleAddBofe}>+ bofe</button>}
+        {session && !btnView && (
+          <button onClick={handleRemoveBofe}>RemoveBofe</button>
+        )}
       </div>
     </div>
   );
