@@ -7,7 +7,7 @@ const apiImdb = axios.create({
   withCredentials: false,
   headers: {
     "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    "x-rapidapi-key": "5506b3f4demshf9c8218eea992ddp1b2390jsn59b2537af677",
+    "x-rapidapi-key": "1ccd003fc9mshc2c488609b1e0f9p18a975jsn6decbebe03ba",
   },
 });
 
@@ -19,7 +19,7 @@ export default {
   getAllNews(id) {
     return apiImdb.get("/actors/get-all-news", { params: { nconst: id } });
   },
-  getFamousInfo(id) {
+  getAboutInfo(id) {
     return apiImdb.get("/actors/get-bio", { params: { nconst: id } });
   },
 };

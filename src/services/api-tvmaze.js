@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_KEY = '5506b3f4demshf9c8218eea992ddp1b2390jsn59b2537af677';
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
+
+const API_KEY = "5506b3f4demshf9c8218eea992ddp1b2390jsn59b2537af677";
 
 // https://rapidapi.com/tvjan/api/tvmaze/
 const apiTvmaze = axios.create({
@@ -32,5 +34,4 @@ export default {
   getPersonNews(name) {
     return apiNewsx.get("/search", { params: { q: name, limit: 10 } });
   },
-
 };

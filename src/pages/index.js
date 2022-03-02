@@ -1,86 +1,120 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
-import ApiImdb from "../services/api-imdb";
+import ApiTvmaze from "../services/api-tvmaze";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  const [results, setResults] = useState([]);
-  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]); // API results
+  const [search, setSearch] = useState(""); // input value
+  const [searchActive, setSearchActive] = useState(false); // Show/NotShow search result
+  const [searchEmpty, setSearchEmpty] = useState(false);
 
   const fetchResults = async () => {
-    const { data } = await ApiImdb.getAutoComplete(search);
-    setSearch(() => "");
-    // const [listName, name, ...rest] = data;'
-    // const famousName = data.d[0].id;
-
-    // const response = await ApiImdb.getFamousInfo(famousName);
-    // console.log(response.data);
-
-    setResults(data.d);
+    try {
+      if (search.length === 0) {
+        setSearchEmpty(true);
+        return;
+      }
+      const { data } = await ApiTvmaze.searchPersonName(search);
+      setResults(data);
+      setSearchActive(true);
+      setSearchEmpty(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleSubmit = (text) => {
     setSearch(text.target.value);
+    setSearchActive(false);
   };
 
+  useEffect(() => {
+    if (!search) {
+      setSearchActive(false);
+      setResults("");
+    }
+  }, [search]);
+
   return (
-    <>
-      {/* <h1>Home</h1>
-      <div
-        style={{
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+    <main>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>Barraca da fofoca</h1>
+          <p>Saiba o que andam falando do seu artista favorito</p>
+          <input
+            type="text"
+            onChange={handleSubmit}
+            value={search}
+            placeholder="digite o nome do artista"
+            onKeyDown={(e) => (e.key === "Enter" ? fetchResults() : "")}
+          />
+          {searchEmpty && (
+            <p>
+              Poxa, não quer saber sobre ninguem. <br />
+              😢
+            </p>
+          )}
+          <button onClick={fetchResults}>Buscar</button>
 
-        <main>
-
-        </main>
-        <h1 className={styles.title}>Barrafa da fofoca</h1>
-        <div style={{ display: "flex" }}>
-          <input type={"text"} onChange={(t) => setSearch(t.target.value)} />
-          <button onClick={async () => await fetchResults()}>Buscar...</button>
-        </div>
-      </div> */}
-      <main>
-        <div className={styles.container}>
-          <div className={styles.contant}>
-            <h1>Barraca da fofoca</h1>
-            <p>Saiba o que andam falando do seu artista favorito</p>
-            <input
-              type="text"
-              onChange={handleSubmit}
-              value={search}
-              placeholder="digite o nome do artista"
-            />
-            <button onClick={fetchResults}>Buscar</button>
-            <div className={styles.list}>
-              {results.filter(item => {
-                return item.s.includes('Actor') || item.s.includes('Actress');
-              }).map((res, k) => {
+          {/* Search results */}
+          <div className={styles.list}>
+            {/* Results */}
+            {!!results.length &&
+              searchActive &&
+              results.map((res, index) => {
                 return (
-                  <a key={k} href={`/fofoca/${res.id}`}>
-                    <div className={styles.list__item}>
-                      <div className={styles.list__item__img_container}>
-                        <Image
-                          src={res.i.imageUrl}
-                          alt={res.l}
-                          width={res.i.width}
-                          height={res.i.height}
-                        />
-                      </div>
-                      <p value={res.id}>{res.l}</p>
-                    </div>
-                  </a>
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: `/artist/${res?.person?.id}`,
+                      query: { data: "test0", data1: "teste1" },
+                    }}
+                    as={`/artist/${res?.person?.id}`}
+                  >
+                    <a className={styles.list__item} test={res}>
+                      {res?.person?.image && (
+                        <div className={styles.list__item__img_container}>
+                          <Image
+                            src={res?.person?.image?.medium}
+                            alt={res?.person?.name}
+                            width={30}
+                            height={30}
+                          />
+                        </div>
+                      )}
+                      {
+                        // Image fallback
+                        !res?.person?.image && (
+                          <div className={styles.list__item__img_container}>
+                            <Image
+                              src="https://via.placeholder.com/30x30.png?text=X"
+                              alt={res?.person?.name}
+                              width={30}
+                              height={30}
+                            />
+                          </div>
+                        )
+                      }
+                      <p>{res?.person?.name}</p>
+                    </a>
+                  </Link>
                 );
               })}
-            </div>
+            {/* No results */}
+            {!results?.length && searchActive && (
+              <div className={styles.list__item}>Sem resultados</div>
+            )}
           </div>
-          <Image src="/images/hero-right.png" alt="Fofoca" width={500} height={500} />
         </div>
-      </main>
-    </>
+        <Image
+          src="/images/hero-right.png"
+          alt="Fofoca"
+          width={500}
+          height={500}
+        />
+      </div>
+    </main>
   );
 }
